@@ -1,0 +1,156 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+  font-family:'Segoe UI',sans-serif;
+  background: radial-gradient(circle at top,#0f0f14,#050506);
+  color:white;
+}
+
+/* HEADER */
+.header {
+  position:sticky;
+  top:0;
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:rgba(10,10,15,0.6);
+  backdrop-filter:blur(15px);
+  z-index:100;
+}
+
+.logo {
+  font-size:22px;
+  font-weight:bold;
+  background: linear-gradient(45deg,#ff003c,#ff7a00);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.search {
+  flex:1;
+  background:#1a1a22;
+  border:none;
+  padding:10px;
+  border-radius:12px;
+  color:white;
+}
+
+/* BURGER */
+.burger {
+  width:30px;
+  cursor:pointer;
+}
+.burger div {
+  height:3px;
+  background:white;
+  margin:5px 0;
+}
+
+/* MENU */
+.menu {
+  position:fixed;
+  right:-260px;
+  top:0;
+  width:260px;
+  height:100%;
+  background:#0d0d12;
+  padding:20px;
+  transition:.4s;
+}
+
+.menu.open {
+  right:0;
+}
+
+.menu a {
+  display:block;
+  margin:10px 0;
+  color:white;
+  opacity:.7;
+  text-decoration:none;
+}
+
+/* FILTERS */
+.filters {
+  display:flex;
+  gap:10px;
+  padding:10px;
+  overflow-x:auto;
+}
+
+.filter {
+  padding:10px 15px;
+  background:#15151c;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.filter.active {
+  background: linear-gradient(45deg,#ff003c,#ff7a00);
+}
+
+/* SERVER */
+.server {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+}
+
+.server-ip {
+  background:#15151c;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* CARDS */
+.container {
+  padding:10px;
+}
+
+.card {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(145deg,#14141c,#0d0d12);
+  padding:12px;
+  border-radius:16px;
+  margin-bottom:12px;
+  transition:.3s;
+}
+
+.card:hover {
+  transform:scale(1.02);
+  box-shadow:0 0 25px rgba(255,0,60,0.35);
+}
+
+.rank { color:#ff4d6d; }
+
+.avatar {
+  width:50px;
+  height:50px;
+  border-radius:12px;
+}
+
+.info { flex:1; }
+
+.tiers span {
+  font-size:11px;
+  padding:3px 6px;
+  border-radius:6px;
+}
+
+.ht { background:#ff9800; }
+.lt { background:#555; }
+
+.region {
+  padding:6px 10px;
+  border-radius:8px;
+}
+
+.na { background:#ff003c; }
+.eu { background:#00c853; }
