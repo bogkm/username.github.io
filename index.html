@@ -2,80 +2,157 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Minecraft Server</title>
+<title>EXETI</title>
+
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: #0f0f0f;
+  background: #0b0b0f;
   color: white;
-  text-align: center;
 }
 
-header {
-  padding: 60px;
-  background: linear-gradient(180deg, #1a1a1a, #000);
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #111;
+  position: sticky;
+  top: 0;
 }
 
-h1 {
-  font-size: 50px;
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff003c, #ff4d6d);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-.btn {
-  display: inline-block;
-  padding: 15px 30px;
-  margin-top: 20px;
-  background: #00ff88;
-  color: black;
+.search {
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 10px;
+  color: gray;
+}
+
+/* SERVER BAR */
+.server-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #14141a;
+}
+
+.server-ip {
+  background: #1a1a1a;
+  padding: 10px 15px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.btn:hover {
-  background: #00cc6a;
+.server-ip:hover {
+  background: #ff003c;
 }
 
-.section {
-  padding: 50px;
+/* LIST */
+.container {
+  padding: 20px;
 }
 
 .card {
-  background: #1a1a1a;
-  padding: 20px;
-  margin: 10px;
+  background: #14141a;
+  margin-bottom: 15px;
+  padding: 15px;
   border-radius: 15px;
-  display: inline-block;
-  width: 250px;
+  display: flex;
+  align-items: center;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  background: #1c1c24;
 }
+
+.rank {
+  font-size: 24px;
+  width: 40px;
+  color: #ff4d6d;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 15px;
+  background: gray;
+}
+
+.name {
+  font-size: 20px;
+}
+
+.region {
+  margin-left: auto;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.na { background: #ff003c; }
+.eu { background: #00c853; }
 
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>🔥 My Server</h1>
-  <p>Лучший Minecraft сервер</p>
-  <div class="btn" onclick="copyIP()">Скопировать IP</div>
-</header>
+<div class="header">
+  <div class="logo">EXETI</div>
+  <div class="search">🔍 Search</div>
+</div>
 
-<div class="section">
-  <h2>О сервере</h2>
-  <div class="card">Выживание</div>
-  <div class="card">Мини-игры</div>
-  <div class="card">Донат</div>
+<div class="server-bar">
+  <div><b>EXI CLUB</b></div>
+  <div class="server-ip" onclick="copyTG()">CHANNEL TG: exetiqueik.t.me</div>
+</div>
+
+<div class="container">
+
+  <!-- PLAYER 1 -->
+  <div class="card">
+    <div class="rank">1</div>
+    <img class="avatar" src="https://mc-heads.net/avatar/Notch">
+    <div class="name">ItzReal</div>
+    <div class="region na">NA</div>
+  </div>
+
+  <!-- PLAYER 2 -->
+  <div class="card">
+    <div class="rank">2</div>
+    <img class="avatar" src="https://mc-heads.net/avatar/Steve">
+    <div class="name">coldifi</div>
+    <div class="region eu">EU</div>
+  </div>
+
+  <!-- PLAYER 3 -->
+  <div class="card">
+    <div class="rank">3</div>
+    <img class="avatar" src="https://mc-heads.net/avatar/Alex">
+    <div class="name">Player123</div>
+    <div class="region na">NA</div>
+  </div>
+
 </div>
 
 <script>
-function copyIP() {
-  navigator.clipboard.writeText("play.myserver.ru");
-  alert("IP скопирован!");
+function copyTG() {
+  navigator.clipboard.writeText("exetiqueik.t.me");
+  alert("TG ссылка скопирована!");
 }
 </script>
 
