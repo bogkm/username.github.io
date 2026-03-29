@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Minecraft Server</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
+  text-align: center;
+}
+
+header {
+  padding: 60px;
+  background: linear-gradient(180deg, #1a1a1a, #000);
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  margin-top: 20px;
+  background: #00ff88;
+  color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #00cc6a;
+}
+
+.section {
+  padding: 50px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 15px;
+  display: inline-block;
+  width: 250px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔥 My Server</h1>
+  <p>Лучший Minecraft сервер</p>
+  <div class="btn" onclick="copyIP()">Скопировать IP</div>
+</header>
+
+<div class="section">
+  <h2>О сервере</h2>
+  <div class="card">Выживание</div>
+  <div class="card">Мини-игры</div>
+  <div class="card">Донат</div>
+</div>
+
+<script>
+function copyIP() {
+  navigator.clipboard.writeText("play.myserver.ru");
+  alert("IP скопирован!");
+}
+</script>
+
+</body>
+</html>
