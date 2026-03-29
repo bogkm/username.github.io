@@ -3,91 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EXETI APP</title>
+
+<title>EXETI</title>
 
 <style>
-body {
+
+/* RESET */
+* {
   margin:0;
-  font-family:sans-serif;
-  background:#050507;
-  color:white;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #0f0f14, #050506);
+  color: white;
+  overflow-x: hidden;
 }
 
 /* HEADER */
 .header {
+  position: sticky;
+  top:0;
   display:flex;
+  align-items:center;
   gap:10px;
-  padding:10px;
-  background:#0f0f15;
+  padding:12px;
+  background: rgba(10,10,15,0.6);
+  backdrop-filter: blur(15px);
+  z-index:100;
 }
 
 .logo {
+  font-size:22px;
   font-weight:bold;
-  color:#ff003c;
+  background: linear-gradient(45deg,#ff003c,#ff7a00);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
+/* SEARCH */
 .search {
   flex:1;
   background:#1a1a22;
   border:none;
-  padding:8px;
-  border-radius:10px;
+  outline:none;
+  padding:10px;
+  border-radius:12px;
   color:white;
 }
 
-/* BUTTON */
-.add-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#ff003c;
-  padding:15px;
-  border-radius:50%;
-  font-size:20px;
+/* BURGER */
+.burger {
+  width:30px;
   cursor:pointer;
 }
 
-/* FORM */
-.form {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#111;
-  padding:15px;
-  display:none;
-}
-
-.form input, .form select {
-  width:100%;
+.burger div {
+  height:3px;
+  background:white;
   margin:5px 0;
-  padding:10px;
-  border-radius:10px;
-  border:none;
+  border-radius:3px;
 }
 
-/* CARD */
+/* SIDEMENU */
+.menu {
+  position:fixed;
+  top:0;
+  right:-260px;
+  width:260px;
+  height:100%;
+  background:#0d0d12;
+  padding:20px;
+  transition:.4s;
+  z-index:200;
+}
+
+.menu.open {
+  right:0;
+}
+
+.menu h2 {
+  margin-bottom:20px;
+}
+
+.menu a {
+  display:block;
+  margin:10px 0;
+  color:white;
+  text-decoration:none;
+  opacity:.7;
+}
+
+.menu a:hover {
+  opacity:1;
+}
+
+/* FILTERS */
+.filters {
+  display:flex;
+  gap:10px;
+  padding:10px;
+  overflow-x:auto;
+}
+
+.filter {
+  padding:10px 15px;
+  background:#15151c;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.filter.active {
+  background: linear-gradient(45deg,#ff003c,#ff7a00);
+}
+
+/* SERVER BAR */
+.server {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+}
+
+.server-ip {
+  background:#15151c;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* LIST */
+.container {
+  padding:10px;
+}
+
 .card {
   display:flex;
   align-items:center;
-  padding:10px;
-  margin:10px;
-  background:#14141c;
+  gap:10px;
+  background: linear-gradient(145deg,#14141c,#0d0d12);
+  padding:12px;
+  border-radius:16px;
+  margin-bottom:12px;
+  transition:.3s;
+  animation: fade .5s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:0 0 25px rgba(255,0,60,0.35);
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+.rank {
+  color:#ff4d6d;
+  width:25px;
+}
+
+.avatar {
+  width:50px;
+  height:50px;
   border-radius:12px;
 }
 
-.rank { width:25px; color:#ff003c; }
+.info { flex:1; }
 
-.avatar {
-  width:40px;
-  height:40px;
-  margin:0 10px;
+.name { font-size:16px; }
+
+.tiers span {
+  font-size:11px;
+  padding:3px 6px;
+  border-radius:6px;
+  margin-right:4px;
 }
 
+.ht { background:#ff9800; }
+.lt { background:#555; }
+
 .region {
-  margin-left:auto;
-  padding:5px 10px;
+  padding:6px 10px;
   border-radius:8px;
+  font-size:12px;
 }
 
 .na { background:#ff003c; }
@@ -98,72 +200,95 @@ body {
 
 <body>
 
+<!-- MENU -->
+<div class="menu" id="menu">
+  <h2>EXETI</h2>
+  <a href="#">🏆 Leaderboard</a>
+  <a href="#">💎 Donate</a>
+  <a href="#">⚙ Settings</a>
+  <a href="#">📊 Stats</a>
+</div>
+
+<!-- HEADER -->
 <div class="header">
   <div class="logo">EXETI</div>
   <input class="search" placeholder="Search..." oninput="render()">
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </div>
 
-<div id="list"></div>
-
-<div class="add-btn" onclick="toggleForm()">+</div>
-
-<div class="form" id="form">
-  <input id="name" placeholder="Nickname">
-  <select id="type">
-    <option value="all">Overall</option>
-    <option value="ltm">LTMs</option>
-    <option value="vanilla">Vanilla</option>
-  </select>
-  <select id="region">
-    <option value="na">NA</option>
-    <option value="eu">EU</option>
-  </select>
-  <input id="tiers" placeholder="HT1,LT2">
-  <button onclick="addPlayer()">Добавить</button>
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter active" onclick="setFilter('all',this)">🏆 Overall</div>
+  <div class="filter" onclick="setFilter('ltm',this)">⚔ LTMs</div>
+  <div class="filter" onclick="setFilter('vanilla',this)">💎 Vanilla</div>
 </div>
+
+<!-- SERVER -->
+<div class="server">
+  <b>EXI CLUB</b>
+  <div class="server-ip" onclick="copyTG()">CHANNEL TG</div>
+</div>
+
+<!-- LIST -->
+<div class="container" id="list"></div>
 
 <script>
 
-let players = JSON.parse(localStorage.getItem("players")||"[]");
+let players = [
+ {name:"ItzReal", type:"all", region:"na", tiers:["HT1","LT2"]},
+ {name:"coldifi", type:"ltm", region:"eu", tiers:["HT1"]},
+ {name:"Player123", type:"vanilla", region:"na", tiers:["LT2"]},
+];
 
-function save(){
-  localStorage.setItem("players", JSON.stringify(players));
-}
+let filter = "all";
 
 function render(){
   let list = document.getElementById("list");
   let search = document.querySelector(".search").value.toLowerCase();
+
   list.innerHTML = "";
 
   players
-    .filter(p => p.name.toLowerCase().includes(search))
-    .forEach((p,i)=>{
+  .filter(p => filter==="all" || p.type===filter)
+  .filter(p => p.name.toLowerCase().includes(search))
+  .forEach((p,i)=>{
 
-      list.innerHTML += `
-      <div class="card">
-        <div class="rank">${i+1}</div>
-        <img class="avatar" src="https://mc-heads.net/avatar/${p.name}">
-        <div>${p.name}</div>
-        <div class="region ${p.region}">${p.region.toUpperCase()}</div>
-      </div>`;
-    });
+    let tiers = p.tiers.map(t =>
+      `<span class="${t.includes('HT')?'ht':'lt'}">${t}</span>`
+    ).join("");
+
+    list.innerHTML += `
+    <div class="card">
+      <div class="rank">${i+1}</div>
+      <img class="avatar" src="https://mc-heads.net/avatar/${p.name}">
+      <div class="info">
+        <div class="name">${p.name}</div>
+        <div class="tiers">${tiers}</div>
+      </div>
+      <div class="region ${p.region}">${p.region.toUpperCase()}</div>
+    </div>`;
+  });
 }
 
-function addPlayer(){
-  let name = document.getElementById("name").value;
-  let type = document.getElementById("type").value;
-  let region = document.getElementById("region").value;
-  let tiers = document.getElementById("tiers").value.split(",");
-
-  players.push({name,type,region,tiers});
-  save();
+function setFilter(f,el){
+  filter=f;
+  document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+  el.classList.add("active");
   render();
-  toggleForm();
 }
 
-function toggleForm(){
-  let f = document.getElementById("form");
-  f.style.display = f.style.display==="block" ? "none" : "block";
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("open");
+}
+
+function copyTG(){
+  navigator.clipboard.writeText("exetiqueik.t.me");
+  alert("Скопировано!");
 }
 
 render();
